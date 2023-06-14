@@ -1,0 +1,76 @@
+@import "./abstracts";
+@import "./composition";
+@import "./reset";
+@import "./utilities";
+
+body {
+	color: $clr-blue-800;
+	font-family: $ff-sans-serif;
+	font-size: $fs-400;
+}
+
+.card {
+	border-radius: 2rem;
+	overflow: hidden;
+	background-color: $clr-neutral-100;
+	@extend %shadow;
+	$parent: &;
+
+	&__title {
+		font-size: $fs-600;
+    font-weight: 900;
+    text-transform: uppercase;
+	}
+
+	&[data-type="product"] {
+		#{$parent}__content {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			padding: $size-32 $size-16 $size-16;
+			position: relative;
+
+			.button {
+				@include interactive-scale($clr-red-500, $clr-neutral-100, -50%);
+				position: absolute;
+				right: $size-16;
+				top: 0;
+			}
+		}
+
+		#{$parent}__image {
+			width: 100%;
+		}
+	}
+
+	&[data-type="link-with-image"] {
+		color: $clr-red-500;
+		font-size: $size-16;
+		text-decoration: none;		
+
+		@include interactive-scale($clr-blue-800, $clr-neutral-100);
+
+		#{$parent}__content {
+			padding: $size-16; 			
+		}
+
+		#{$parent}__image {
+			height: 8.75rem;
+			width: 100%;
+			object-fit: cover;
+			object-position: top center;
+		}
+	}
+}
+
+.button {
+  display: inline-block;
+  border: 0;
+  text-decoration: none;
+  cursor: pointer;
+  padding: $size-16;
+  background: $clr-red-400;
+  color: $clr-neutral-100;
+  border-radius: 100vw;
+	@extend %shadow;  
+}
